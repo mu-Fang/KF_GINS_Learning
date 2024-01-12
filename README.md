@@ -1,8 +1,5 @@
 # KF_GINS_Learning
 
-## kf_gins mian cpp
-读取yaml配置文件，得到imu和GNSS定位结果路径
-
 ### 1、函数调用关系
 ![image-20230925181044694](https://pic-bed-1316053657.cos.ap-nanjing.myqcloud.com/img/image-20230925181044694.png)
 
@@ -17,3 +14,22 @@
 * `insMech()` 中 IMU 机械编排，依次进行速度更新、位置更新、姿态更新。
 * `gnssUpdate()` 中进行 GNSS 量测更新，实现杆臂补偿。
 * `stateFeedback()` GNSS 量测更新后，状态向量误差反馈。
+
+### 3、kf_gins main.cpp
+读取yaml配置文件，得到imu和GNSS定位结果路径
+
+首先判断命令行参数，如果不为 2（可执行程序名算第一个参数 `argv[0]`）即没传入配置文件路径，输出提示并退出程序：
+1.命令行参数为可执行程序的路径 2.第二个命令行参数为可执行程序的yaml配置文件
+
+```cpp
+if (argc != 2) {
+    std::cout << "usage: KF-GINS kf-gins.yaml" << std::endl;
+    return -1;
+}
+```
+
+基于absl:Now函数获得当前程序运行的电脑时间，基于北京时区的时间
+```cpp
+auto ts = absl::Now();
+```
+
