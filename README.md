@@ -4,6 +4,7 @@
 读取yaml配置文件，得到imu和GNSS定位结果路径
 
 ### 1、函数调用关系
+![image-20230925181044694](https://pic-bed-1316053657.cos.ap-nanjing.myqcloud.com/img/image-20230925181044694.png)
 
 ![image-20230925181228939](https://pic-bed-1316053657.cos.ap-nanjing.myqcloud.com/img/image-20230925181228939.png)
 
