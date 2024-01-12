@@ -33,3 +33,26 @@ if (argc != 2) {
 auto ts = absl::Now();
 ```
 
+YAML库尝试读取配置文件，如何读取不成功LoadFile会给出Badfile exception信息，会输出读取配置文件失败。如果读取成功，返回一个分配内存空间的config对象。
+```cpp
+    YAML::Node config;
+    try {
+        config = YAML::LoadFile(argv[1]);
+    } catch (YAML::Exception &exception) {
+        std::cout << "Failed to read configuration file. Please check the path and format of the configuration file!"
+                  << std::endl;
+        return -1;
+    }
+```
+
+配置选项类
+![image-20230925183309602](https://pic-bed-1316053657.cos.ap-nanjing.myqcloud.com/img/image-20230925183309602.png)
+
+创建一个GINSOptions结构体对象，里面存储配置文件中的误差参数、初始位置和初始姿态，IMU误差模型参数（随机游走和零篇不稳定性）
+```cpp
+    GINSOptions options;
+    if (!loadConfig(config, options)) {
+        std::cout << "Error occurs in the configuration file!" << std::endl;
+        return -1;
+    }
+```
