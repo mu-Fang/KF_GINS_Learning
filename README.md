@@ -56,3 +56,48 @@ YAML库尝试读取配置文件，如何读取不成功LoadFile会给出Badfile 
         return -1;
     }
 ```
+
+loadConfig 从yaml配置文件中读取imu初始状态和imu误差参数进入options结构体中
+```cpp
+bool loadConfig(YAML::Node &config, GINSOptions &options) {
+
+    // 读取初始位置(纬度 经度 高程)、(北向速度 东向速度 垂向速度)、姿态(欧拉角，ZYX旋转顺序, 横滚角、俯仰角、航向角)
+    // load initial position(latitude longitude altitude)
+    //              velocity(speeds in the directions of north, east and down)
+    //              attitude(euler angle, ZYX, roll, pitch and yaw)
+    std::vector<double> vec1, vec2, vec3, vec4, vec5, vec6;
+    try {
+        vec1 = config["initpos"].as<std::vector<double>>();
+        vec2 = config["initvel"].as<std::vector<double>>();
+        vec3 = config["initatt"].as<std::vector<double>>();
+    } catch (YAML::Exception &exception) {
+        std::cout << "Failed when loading configuration. Please check initial position, velocity, and attitude!"
+                  << std::endl;
+        return false;
+    }
+    for (int i = 0; i < 3; i++) {
+        options.initstate.pos[i]   = vec1[i] * D2R;
+        options.initstate.vel[i]   = vec2[i];
+        options.initstate.euler[i] = vec3[i] * D2R;
+    }
+    options.initstate.pos[2] *= R2D;
+
+    // 读取IMU误差初始值(零偏和比例因子)
+    // load initial imu error (bias and scale factor)
+    try {
+        vec1 = config["initgyrbias"].as<std::vector<double>>();
+        vec2 = config["initaccbias"].as<std::vector<double>>();
+        vec3 = config["initgyrscale"].as<std::vector<double>>();
+        vec4 = config["initaccscale"].as<std::vector<double>>();
+    } catch (YAML::Exception &exception) {
+        std::cout << "Failed when loading configuration. Please check initial IMU error!" << std::endl;
+        return false;
+    }
+    for (int i = 0; i < 3; i++) {
+        options.initstate.imuerror.gyrbias[i]  = vec1[i] * D2R / 3600.0;
+        options.initstate.imuerror.accbias[i]  = vec2[i] * 1e-5;
+        options.initstate.imuerror.gyrscale[i] = vec3[i] * 1e-6;
+        options.initstate.imuerror.accscale[i] = vec4[i] * 1e-6;
+    }
+```
+
