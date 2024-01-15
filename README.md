@@ -101,3 +101,14 @@ bool loadConfig(YAML::Node &config, GINSOptions &options) {
     }
 ```
 
+在主函数内部从yaml配置文件中读取，imu GNSS-RTK后处理文件路径以及处理时间范围
+```cpp
+std::string imupath, gnsspath, outputpath;
+int imudatalen, imudatarate;
+double starttime, endtime;
+```
+
+```cpp
+    GnssFileLoader gnssfile(gnsspath);
+    ImuFileLoader imufile(imupath, imudatalen, imudatarate);
+```
