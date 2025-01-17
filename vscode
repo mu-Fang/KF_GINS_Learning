@@ -1,0 +1,168 @@
+{
+    /*editor*/
+    "editor.cursorBlinking": "smooth",
+    "editor.mouseWheelZoom": true,
+    "editor.renderWhitespace": "boundary", //除了两个单词之间用于分隔单词的一个空格，以一个小灰点的样子使空格可见
+    "[python]": {
+        // "editor.formatOnPaste": true,
+        // "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "editor.formatOnPaste": true, //在粘贴时格式化代码
+    "editor.formatOnType": true, //敲完一行代码自动格式化
+    "editor.smoothScrolling": true, //使编辑器滚动变平滑
+    "editor.tabCompletion": "on",
+    "cmake.configureOnOpen": true,
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "files.autoGuessEncoding": true,
+    "security.workspace.trust.untrustedFiles": "open",
+    // 自定义的颜色
+    "editor.tokenColorCustomizations": {
+        "comments": "#1da15f", // 注释
+        "keywords": "#e75ee7", // 关键字
+        // "variables": "#6784d4", // 变量名 函数的参数名 
+        // "strings": "#d87920", // 字符串
+        // "functions": "#ffbb00", // 自定义及内置的函数名称 如：print
+        // "numbers": "#00eeff", // 数字
+        "textMateRules": [
+            //系统内置的函数名称的颜色 如：print len 
+            // {
+            //     "scope": "support.function",
+            //     "settings": {
+            //          "foreground": "#ffbb00",
+            //                 }
+            //  },
+            //逻辑符号：如 and  or 
+            {
+                "scope": "keyword.operator.logical", //逻辑符号 && || !
+                "settings": {
+                    "foreground": "#f86ebf",
+                    "fontStyle": ""
+                }
+            },
+            //换行符、转义符等如 ：\r \n
+            {
+                "scope": "constant.character.escape", //"\r\n"
+                "settings": {
+                    "foreground": "#ed7461",
+                    "fontStyle": ""
+                }
+            },
+            {
+                "scope": "entity.name.namespace", //导入部分
+                "settings": {
+                    "foreground": "#d3fa52"
+                }
+            },
+            {
+                "scope": "keyword.operator", //=等号/赋值号 |= &=
+                "settings": {
+                    "foreground": "#b6f67e",
+                }
+            },
+            {
+                "scope": "meta.function-call.generic.python", //函数调用
+                "settings": {
+                    "foreground": "#f0a78a",
+                }
+            },
+            {
+                "scope": "meta.scope.prerequisites.makefile", //Makefile
+                "settings": {
+                    "foreground": "#54b7df",
+                }
+            },
+        ]
+    },
+    "editor.semanticTokenColorCustomizations": {},
+    "workbench.list.smoothScrolling": true, //在全屏模式下仍然显示窗口顶部菜单（没有菜单很难受）
+    "window.dialogStyle": "custom", //使用更具有VSCode的UI风格的弹窗提示（更美观）
+    /*debug*/
+    "debug.internalConsoleOptions": "openOnSessionStart", //每次调试都打开调试控制台，方便调试
+    "debug.showBreakpointsInOverviewRuler": true, //在滚动条标尺上显示断点的位置，便于查找断点的位置
+    "workbench.iconTheme": "material-icon-theme",
+    "explorer.confirmDelete": false, //删除文件时不弹出确认弹窗
+    /*code-runner*/
+    "code-runner.executorMap": {
+        //  "python": "set PYTHONIOENCODING=utf8 && python -u",
+        "javascript": "node",
+        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "zig": "zig run",
+        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "php": "php",
+        "python": "set PYTHONIOENCODING=utf8 && python -u",
+        "perl": "perl",
+        "perl6": "perl6",
+        "ruby": "ruby",
+        "go": "go run",
+        "lua": "lua",
+        "groovy": "groovy",
+        "powershell": "powershell -ExecutionPolicy ByPass -File",
+        "bat": "cmd /c",
+        "shellscript": "bash",
+        "fsharp": "fsi",
+        "csharp": "scriptcs",
+        "vbscript": "cscript //Nologo",
+        "typescript": "ts-node",
+        "coffeescript": "coffee",
+        "scala": "scala",
+        "swift": "swift",
+        "julia": "julia",
+        "crystal": "crystal",
+        "ocaml": "ocaml",
+        "r": "Rscript",
+        "applescript": "osascript",
+        "clojure": "lein exec",
+        "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
+        "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+        "racket": "racket",
+        "scheme": "csi -script",
+        "ahk": "autohotkey",
+        "autoit": "autoit3",
+        "dart": "dart",
+        "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
+        "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
+        "haskell": "runghc",
+        "nim": "nim compile --verbosity:0 --hints:off --run",
+        "lisp": "sbcl --script",
+        "kit": "kitc --run",
+        "v": "v run",
+        "sass": "sass --style expanded",
+        "scss": "scss --style expanded",
+        "less": "cd $dir && lessc $fileName $fileNameWithoutExt.css",
+        "FortranFreeForm": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran-modern": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "sml": "cd $dir && sml $fileName"
+    },
+    "code-runner.saveFileBeforeRun": true,
+    "remote.SSH.remotePlatform": {
+        "test": "linux",
+        "39.100.115.66": "linux"
+    },
+    "git.autoRepositoryDetection": false,
+    "git.autorefresh": false,
+    "workbench.editor.enablePreview": false,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": true,
+        "markdown": false,
+        "scminput": false
+    },
+    "editor.fontFamily": "Consolas, 'Courier New', Consolas",
+    "editor.fontSize": 16,
+    "window.titleBarStyle": "custom",
+    "cmake.showOptionsMovedNotification": false,
+    "git.ignoreLegacyWarning": true,
+    "python.condaPath": "D:\\Users\\lenovo\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "python.defaultInterpreterPath": "/home/fangmu/anaconda3/bin/python",
+    "github.copilot.editor.enableAutoCompletions": true,
+    "cmake.pinnedCommands": [
+        "workbench.action.tasks.configureTaskRunner",
+        "workbench.action.tasks.runTask"
+    ],
+}
